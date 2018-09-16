@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Aux from '../../hoc/aux1'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -92,7 +92,6 @@ class BurgerBuilder extends Component {
     }
 
 
-
     render() {
         const disabledInfo = {
             ...this.state.ingredients
@@ -104,9 +103,11 @@ class BurgerBuilder extends Component {
 
         return (
             <Aux>
-                <Burger ingredients={this.state.ingredients} />
+                <Burger ingredients={this.state.ingredients}/>
                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                    <OrderSummary price={this.state.totalPrice} ingredients={this.state.ingredients} purchaseCanceled={this.purchaseCancelHandler} purchaseConitnued={this.purchaseConitnueHandler} />
+                    <OrderSummary price={this.state.totalPrice} ingredients={this.state.ingredients}
+                                  purchaseCanceled={this.purchaseCancelHandler}
+                                  purchaseConitnued={this.purchaseConitnueHandler}/>
                 </Modal>
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
@@ -114,7 +115,7 @@ class BurgerBuilder extends Component {
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
                     ordered={this.purchaseHandler}
-                    purchasable={this.state.purchasable} />
+                    purchasable={this.state.purchasable}/>
             </Aux>
         )
     }
