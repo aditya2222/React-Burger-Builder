@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import withErrorHandler from '../../hoc/withErrorHandle/withErrorHandle'
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -49,8 +50,8 @@ class BurgerBuilder extends Component {
         };
         updatedIngredients[type] = updatedCount;
         const priceAddtition = INGREDIENT_PRICES[type];
-        const oldPrice = this.state.totalPrice
-        const newPrice = oldPrice + priceAddtition
+        const oldPrice = this.state.totalPrice;
+        const newPrice = oldPrice + priceAddtition;
         this.setState({
             totalPrice: newPrice,
             ingredients: updatedIngredients
@@ -59,18 +60,18 @@ class BurgerBuilder extends Component {
     };
 
     removeIngredientHandler = (type) => {
-        const oldCount = this.state.ingredients[type]
+        const oldCount = this.state.ingredients[type];
         if (oldCount <= 0) {
             return;
         }
-        const updatedCount = oldCount - 1
+        const updatedCount = oldCount - 1;
         const updatedIngredients = {
             ...this.state.ingredients
         };
-        updatedIngredients[type] = updatedCount
-        const priceDeduction = INGREDIENT_PRICES[type]
-        const oldPrice = this.state.totalPrice
-        const newPrice = oldPrice - priceDeduction
+        updatedIngredients[type] = updatedCount;
+        const priceDeduction = INGREDIENT_PRICES[type];
+        const oldPrice = this.state.totalPrice;
+        const newPrice = oldPrice - priceDeduction;
         this.setState({
             ingredients: updatedIngredients,
             totalPrice: newPrice
@@ -159,4 +160,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default BurgerBuilder
+export default withErrorHandler(BurgerBuilder, axios)
