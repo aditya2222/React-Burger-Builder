@@ -4,75 +4,68 @@ import axios from '../../axios-orders'
 import withErrorHandler from '../../hoc/withErrorHandle/withErrorHandle'
 
 
-class Orders extends Component{
+class Orders extends Component {
 
-	state = {
+    state = {
 
-		orders: [],
-		loading: true
-
-
-	}
-
-	componentDidMount(){
-
-		axios.get('/orders.json')
-
-			.then(res=>{
-				const fetchedOrders = [];
-
-				for(let key in res.data){
-
-					fetchedOrders.push({
-
-						...res.data[key],
-						id: key
-
-					})
-				}
-
-				this.setState({
-					loading:false,
-					orders: fetchedOrders
-				})
-
-			})
-			.catch(err=>{
-				console.log('This is some error',err)
-
-				this.setState({
-
-					loading: false	
-
-				})		
-
-			})
+        orders: [],
+        loading: true
 
 
-	}
+    }
 
-	render(){
+    componentDidMount() {
 
-		return(
+        axios.get('/orders.json')
 
-			<div>
+            .then(res => {
+                const fetchedOrders = [];
+
+                for (let key in res.data) {
+
+                    fetchedOrders.push({
+
+                        ...res.data[key],
+                        id: key
+
+                    })
+                }
+
+                this.setState({
+                    loading: false,
+                    orders: fetchedOrders
+                })
+
+            })
+            .catch(err => {
+                console.log('This is some error', err)
+
+                this.setState({
+
+                    loading: false
+
+                })
+
+            })
 
 
-			{this.state.orders.map((el, index)=>{
+    }
 
-				return		<Order/>
+    render() {
 
-			})}
+        return (
 
+            <div>
+                {this.state.orders.map(order => {
+                    return <Order key={order.id} ingredients={order.ingredients} price={order.price}/>
+                })}
+            </div>
 
-			</div>
+        )
 
-		)
-
-	}
-
+    }
 
 
 }
 
-export default withErrorHandler(Orders,axios)
+export default withErrorHandler(Orders, axios)
