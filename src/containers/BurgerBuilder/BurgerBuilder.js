@@ -22,7 +22,7 @@ class BurgerBuilder extends Component {
         purchasable: false,
         purchasing: false,
         loading: false,
-        error: null
+	error: null
     };
 
     componentDidMount() {
