@@ -127,17 +127,17 @@ class ContactData extends Component {
 
     checkValidity = (value, rules) => {
 
-        let isValid = false;
+        let isValid = true;
 
         if (rules.requried) {
-            isValid = value.trim() !== '';
+            isValid = value.trim() !== '' && isValid;
         }
 
         if (rules.minLength) {
-            isValid = value.length >= rules.minLength
+            isValid = value.length >= rules.minLength && isValid
         }
         if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength
+            isValid = value.length <= rules.maxLength && isValid
         }
 
         return isValid
@@ -177,7 +177,7 @@ class ContactData extends Component {
 
             <form onSubmit={this.orderHandler}>
                 {formELementsArray.map((el, index) => {
-                    return <Input key={el.id} elementType={el.config.elementType} elementConfig={el.config.elementConfig} value={el.config.value}
+                    return <Input invalid={!el.config.valid} shouldValidate={el.config.validation} key={el.id} elementType={el.config.elementType} elementConfig={el.config.elementConfig} value={el.config.value}
                         changed={(event) => this.inputChangedHandler(event, el.id)} />
                 })}
                 <Button btnType="Success">ORDER</Button>
