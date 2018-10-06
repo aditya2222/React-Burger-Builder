@@ -121,7 +121,7 @@ class ContactData extends Component {
             .then(respoonse => {
                 this.setState({
                     loading: false,
-                })
+                });
                 this.props.history.push('/')
             })
             .catch(error => {
@@ -130,7 +130,7 @@ class ContactData extends Component {
                 })
             })
 
-    }
+    };
 
 
     checkValidity = (value, rules) => {
@@ -167,12 +167,12 @@ class ContactData extends Component {
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
 	updatedFormElement.touched = true
         updatedOrderForm[inputIdentifier] = updatedFormElement
-        console.log(updatedFormElement)
+        console.log(updatedFormElement);
 
 	let formIsValid = true;
 	for(let inputIdentifiers in updatedOrderForm){
 	
-		formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
+		formIsValid = updatedOrderForm[inputIdentifiers].valid && formIsValid
 	
 	}
 	
