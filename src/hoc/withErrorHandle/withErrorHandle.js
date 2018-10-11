@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Modal from '../../components/UI/Modal/Modal'
 import Aux from '../aux1'
 
@@ -13,7 +13,7 @@ const withErrorHandle = (WrappedComponent, axios) => {
 
         componentWillMount() {
             this.reqInterceptor = axios.interceptors.request.use(req => {
-                this.setState({error: null});
+                this.setState({ error: null });
                 return req
             });
             this.resInterceptor = axios.interceptors.response.use(res => res, error => {
