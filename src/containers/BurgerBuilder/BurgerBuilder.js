@@ -73,7 +73,6 @@ class BurgerBuilder extends Component {
                         ordered={this.purchaseHandler}
                         purchasable={this.updatePurchaseState(this.props.ings)} />
                 </Aux>
-
             );
 
             orderSummary = <OrderSummary price={this.props.price} ingredients={this.props.ings}
