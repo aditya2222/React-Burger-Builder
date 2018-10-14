@@ -12,9 +12,8 @@ class Orders extends Component {
     componentDidMount() {
 
     this.props.onFetchOrders()
-
     }
-
+    
     render() {
 
         let orders = <Spinner />
@@ -25,7 +24,7 @@ class Orders extends Component {
                     return <Order key={order.id} ingredients={order.ingredients} price={order.price}/>
                 })
 
-                        )
+                )
         }
 
         return (
