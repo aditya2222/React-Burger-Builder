@@ -37,32 +37,6 @@ const purchaseBurgerFail = (state, action) => {
 	});
 }
 
-const fetchOrdersStart = (state, actions) =>{
-
-	return updateObject(state, {
-		loading: true
-	});
-}
-
-const fetchOrderSuccess = (state, action) =>{
-
-	return updateObject(state, {
-		orders: action.orders,
-		loading: false
-	})
-}
-
-const fetchOrderFailed = (state, action) => {
-
-	return updateObject(state, {
-		loading: false
-
-	});
-
-}
-
-
-
 const reducer = (state = initialState, action) => {
 
 	switch (action.type) {
@@ -73,20 +47,26 @@ const reducer = (state = initialState, action) => {
 		case actionTypes.PURCHASE_BURGER_START:
 			return purchaseBurgerStart(state, action)
 
+
 		case actionTypes.PURCHASE_BURGER_SUCCESS:
-			return purchaseBurgerSuccess(state, action)
+			return purchaseBurgerSuccess
 
 		case actionTypes.PURCHASE_BURGER_FAIL:
 			return purchaseBurgerFail(state, action)
 
-		case actionTypes.FETCH_ORDERS_START:
-			return fetchOrdersStart(state, action)
 		case actionTypes.FETCH_ORDERS_SUCCESS:
-			return fetchOrderSuccess(state, action)
+			return updateObject(state, {
+				orders: action.orders,
+				loading: false
+			})
 		case actionTypes.FETCH_ORDERS_FAIL:
-			return fetchOrderFailed(state, action)
+			return updateObject(state, {
+				loading: false
 
-		default:return state
+			});
+
+		default:
+			return state
 	}
 
 }
