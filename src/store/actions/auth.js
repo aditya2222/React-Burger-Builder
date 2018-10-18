@@ -42,8 +42,8 @@ export const auth = (email, password, isSignup) => {
                 dispatch(authSuccess(repsonse.data.idToken, repsonse.data.localId))
             })
             .catch((error) => {
-                console.log(error)
-                dispatch(authFail(error))
+                console.log('this is the error object', error.response)
+                dispatch(authFail(error.response.data.error))
             })
     }
 }
