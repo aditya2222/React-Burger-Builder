@@ -22,6 +22,19 @@ export const authFail = (error) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout())
+        }, expirationTime * 1000)
+    }
+}
 
 export const auth = (email, password, isSignup) => {
     return dispatch => {
@@ -37,9 +50,10 @@ export const auth = (email, password, isSignup) => {
             url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBMuwBq3yKQtJjIno05M6Vo4WesEWqM8Tk'
         }
         axios.post(url, authData)
-            .then((repsonse) => {
-                console.log(repsonse)
-                dispatch(authSuccess(repsonse.data.idToken, repsonse.data.localId))
+            .then((response) => {
+                console.log(response)
+                dispatch(authSuccess(response.data.idToken, response.data.localId))
+                dispatch(checkAuthTimeout(response.data.expiresIn))
             })
             .catch((error) => {
                 console.log('this is the error object', error.response)
