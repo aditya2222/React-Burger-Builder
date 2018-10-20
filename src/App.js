@@ -8,6 +8,7 @@ import Auth from './containers/Auth/Auth'
 import Logout from './containers/Auth/Logout/Logout'
 import {connect} from 'react-redux'
 import * as actions from './store/actions/index'
+import {withRouter} from 'react-router-dom'
 
 
 class App extends Component {
@@ -37,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps )(App);
+export default withRouter(connect(null, mapDispatchToProps )(App))
