@@ -71,32 +71,32 @@ export const auth = (email, password, isSignup) => {
 
 export const setAuthRedirectPath = (path) => {
 
-	return{
-	
-		type: actionTypes.SET_AUTH_REDIRECT_PATH,
-		path: path
-	
-	}
+    return {
+
+        type: actionTypes.SET_AUTH_REDIRECT_PATH,
+        path: path
+
+    }
 }
 
 
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token')
-        if(!token){
-            dispatch(logout())    
+        if (!token) {
+            dispatch(logout())
         }
-        else{
+        else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'))
-            if( expirationDate > new Date()){
+            if (expirationDate > new Date()) {
                 const userId = localStorage.getItem('userId')
                 dispatch(authSuccess(token, userId))
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime())/1000))
-            }else{
+                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
+            } else {
                 dispatch(logout())
             }
         }
-        
+
     }
 }
 
