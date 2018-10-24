@@ -85,7 +85,7 @@ export const fetchOrders = (token, userId) => {
                 dispatch(fetchOrdersSuccess(fetchedOrders))
             })
             .catch(err => {
-                console.log('This is some error', err)
+                
                 dispatch(fetchOrdersFail(err))
 
             })
