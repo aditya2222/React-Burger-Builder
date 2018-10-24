@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'
-import { updateObject } from '../utility'
+import { updateObject } from '../../shared/utility'
 
 const initialState = {
     token: null,
@@ -7,11 +7,11 @@ const initialState = {
     error: null,
     loading: false,
     authRedirectPath: '/'
-}
+};
 
 const authStart = (state, action) => {
-    return updateObject(state, { error: null, loading: true })
-}
+    return updateObject(state, {error: null, loading: true})
+};
 
 const authSuccess = (state, action) => {
     return updateObject(state, {

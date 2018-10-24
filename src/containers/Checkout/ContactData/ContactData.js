@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Button from '../../../components/UI/Button/Button'
 import classes from './ContactData.css'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import axios from '../../../axios-orders'
 import withErrorHandler from '../../../hoc/withErrorHandle/withErrorHandle'
 import * as actions from '../../../store/actions/index'
+import {updateObject} from '../../../shared/utility'
 
 class ContactData extends Component {
     state = {
@@ -142,23 +143,20 @@ class ContactData extends Component {
         return isValid
 
 
-    }
+    };
 
 
     inputChangedHandler = (event, inputIdentifier) => {
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        }
 
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        }
 
-        updatedFormElement.value = event.target.value
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
-        updatedFormElement.touched = true
-        updatedOrderForm[inputIdentifier] = updatedFormElement
-        console.log(updatedFormElement);
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid: this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            touched: true
+        });
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormElement
+        });
 
         let formIsValid = true;
         for (let inputIdentifiers in updatedOrderForm) {
@@ -186,8 +184,10 @@ class ContactData extends Component {
 
             <form onSubmit={this.orderHandler}>
                 {formELementsArray.map((el, index) => {
-                    return <Input touched={el.config.touched} invalid={!el.config.valid} shouldValidate={el.config.validation} key={el.id} elementType={el.config.elementType} elementConfig={el.config.elementConfig} value={el.config.value}
-                        changed={(event) => this.inputChangedHandler(event, el.id)} />
+                    return <Input touched={el.config.touched} invalid={!el.config.valid}
+                                  shouldValidate={el.config.validation} key={el.id} elementType={el.config.elementType}
+                                  elementConfig={el.config.elementConfig} value={el.config.value}
+                                  changed={(event) => this.inputChangedHandler(event, el.id)}/>
                 })}
                 <Button disabled={!this.state.formIsValid} btnType="Success">ORDER</Button>
             </form>
@@ -195,7 +195,7 @@ class ContactData extends Component {
         );
         if (this.props.loading) {
 
-            form = <Spinner />
+            form = <Spinner/>
 
         }
         return (
