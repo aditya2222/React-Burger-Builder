@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 import classes from './Auth.css'
 import * as actions from '../../store/actions/index'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import Spinner from '../../components/UI/Spinner/Spinner'
-import { Redirect } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 class Auth extends Component {
 
@@ -70,7 +70,7 @@ class Auth extends Component {
         return isValid
 
 
-    }
+    };
 
     inputChangedHandler = (event, controlName) => {
         const updatedControls = {
@@ -94,7 +94,7 @@ class Auth extends Component {
 
     switchAuthModeHandler = () => {
         this.setState((prevState) => {
-            return { isSignUp: !prevState.isSignUp }
+            return {isSignUp: !prevState.isSignUp}
         })
     }
 
@@ -109,23 +109,25 @@ class Auth extends Component {
         }
 
         let form = formELementsArray.map((el, index) => {
-            return <Input touched={el.config.touched} invalid={!el.config.valid} shouldValidate={el.config.validation} key={el.id} elementType={el.config.elementType} elementConfig={el.config.elementConfig} value={el.config.value}
-                changed={(event) => this.inputChangedHandler(event, el.id)} />
+            return <Input touched={el.config.touched} invalid={!el.config.valid} shouldValidate={el.config.validation}
+                          key={el.id} elementType={el.config.elementType} elementConfig={el.config.elementConfig}
+                          value={el.config.value}
+                          changed={(event) => this.inputChangedHandler(event, el.id)}/>
         })
         if (this.props.loading) {
-            form = <Spinner />
+            form = <Spinner/>
         }
         let errorMessage = null;
         if (this.props.error) {
             errorMessage = (
-                <p style={{ backgroundColor: 'red' }}>
+                <p style={{backgroundColor: 'red'}}>
                     {this.props.error.message}
                 </p>
             )
         }
         let authRedirect = null;
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to={this.props.authRedirectPath} />
+            authRedirect = <Redirect to={this.props.authRedirectPath}/>
         }
         return (
             <div className={classes.Auth}>
@@ -135,7 +137,8 @@ class Auth extends Component {
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
                 </form>
-                <Button btnType="Danger" clicked={this.switchAuthModeHandler}>SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
+                <Button btnType="Danger" clicked={this.switchAuthModeHandler}>SWITCH
+                    TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
             </div>
         )
     }
