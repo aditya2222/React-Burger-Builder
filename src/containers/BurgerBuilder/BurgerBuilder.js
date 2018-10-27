@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import axios from '../../axios-orders'
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
 	state = {
 		purchasing: false,
 	};
@@ -34,14 +34,14 @@ class BurgerBuilder extends Component {
 
 	purchaseHandler = () => {
 		if (this.props.isAuthenticated) {
-	
+
 
 			this.setState({
 				purchasing: true
 			})
 		}
 		else {
-	
+
 			this.props.onSetAuthRedirectPath('/checkout')
 			this.props.history.push('/auth')
 
@@ -93,7 +93,7 @@ class BurgerBuilder extends Component {
 
 		return (
 			<Aux>
-			
+
 
 				<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
 					{orderSummary}
