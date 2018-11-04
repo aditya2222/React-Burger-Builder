@@ -1,6 +1,7 @@
 import { takeEvery } from "redux-saga";
 import * as actionTypes from '../actions/actionTypes'
 import { logoutSaga, checkAuthTimeoutSaga, authUserSaga, authCheckStateSaga } from "./auth";
+import { initIngredientsSaga } from './burgerBuilder'
 
 // the function below is a generator
 
@@ -9,5 +10,9 @@ export function* watchAll(action) {
     yield takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga)
     yield takeEvery(actionTypes.AUTH_USER, authUserSaga)
     yield takeEvery(actionTypes.AUTH_CHECK_INITAL_STATE, authCheckStateSaga)
+}
+
+export function* watchBurgerBuilder(action) {
+    yield takeEvery(actionTypes.INIT_INGREDIENTS, initIngredientsSaga)
 }
 
