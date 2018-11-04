@@ -38,18 +38,18 @@ export const logoutSucceed = () => {
 
 export const checkAuthTimeout = (expirationTime) => {
     return {
-        type:actionTypes.AUTH_CHECK_TIMEOUT,
+        type: actionTypes.AUTH_CHECK_TIMEOUT,
         expirationTime: expirationTime
     }
 }
 
 export const auth = (email, password, isSignup) => {
-   return {
-    type: actionTypes.AUTH_USER,
-    email: email,
-    password: password,
-    isSignup: isSignup
-   }
+    return {
+        type: actionTypes.AUTH_USER,
+        email: email,
+        password: password,
+        isSignup: isSignup
+    }
 }
 
 export const setAuthRedirectPath = (path) => {
@@ -64,22 +64,8 @@ export const setAuthRedirectPath = (path) => {
 
 
 export const authCheckState = () => {
-    return dispatch => {
-        const token = localStorage.getItem('token')
-        if (!token) {
-            dispatch(logout())
-        }
-        else {
-            const expirationDate = new Date(localStorage.getItem('expirationDate'))
-            if (expirationDate > new Date()) {
-                const userId = localStorage.getItem('userId')
-                dispatch(authSuccess(token, userId))
-                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000))
-            } else {
-                dispatch(logout())
-            }
-        }
-
+    return {
+        type: actionTypes.AUTH_CHECK_INITAL_STATE
     }
 }
 
