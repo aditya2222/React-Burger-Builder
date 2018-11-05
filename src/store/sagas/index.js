@@ -1,7 +1,8 @@
-import { takeEvery } from "redux-saga";
+import {takeEvery} from "redux-saga/effects";
 import * as actionTypes from '../actions/actionTypes'
-import { logoutSaga, checkAuthTimeoutSaga, authUserSaga, authCheckStateSaga } from "./auth";
-import { initIngredientsSaga } from './burgerBuilder'
+import {logoutSaga, checkAuthTimeoutSaga, authUserSaga, authCheckStateSaga} from "./auth";
+import {initIngredientsSaga} from './burgerBuilder'
+import {purchaseBurgerSaga, fetchOrdersSaga} from './order'
 
 // the function below is a generator
 
@@ -14,5 +15,10 @@ export function* watchAll(action) {
 
 export function* watchBurgerBuilder(action) {
     yield takeEvery(actionTypes.INIT_INGREDIENTS, initIngredientsSaga)
+}
+
+export function* watchOrder(action) {
+    yield takeEvery(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga)
+    yield takeEvery(actionTypes.FETCH_ORDERS, fetchOrdersSaga)
 }
 

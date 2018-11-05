@@ -9,6 +9,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import asyncComponent from './hoc/asyncComponent/asyncComponent'
 
 
+
 const asyncCheckout = asyncComponent(() => {
     return import('./containers/Checkout/Checkout')
 })

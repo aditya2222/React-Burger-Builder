@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import burgerBuilderReducer from './store/reducers/burgerBuilder'
 import thunk from 'redux-thunk'
 import orderReducer from './store/reducers/order'
 import authReducer from './store/reducers/auth'
 import createSagaMiddleware from 'redux-saga'
-import { watchAll, watchBurgerBuilder } from './store/sagas/index'
+import {watchAll, watchBurgerBuilder, watchOrder} from './store/sagas/index'
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -32,11 +32,12 @@ const store = createStore(
 // sagaMiddleware.run(logoutSaga)
 sagaMiddleware.run(watchAll)
 sagaMiddleware.run(watchBurgerBuilder)
+sagaMiddleware.run(watchOrder)
 
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <App/>
         </BrowserRouter>
     </Provider>
 
